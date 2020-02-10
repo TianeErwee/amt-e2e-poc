@@ -8,25 +8,32 @@ describe('login', () => {
 
     cy.visit('/');
     cy.url().should('include', 'landing-page');
-    cy.get('#sign-in-button').click({force: true});
-
+    cy.get('#sign-in-button').click();
     cy.url().should('include', 'login');
-    cy.get('app-login').within(() => {
-      cy.get('app-input-text').within(() => {
-        cy.get('input').type('tiane.erwee@gmail.com', {force: true});
-      })
-      cy.get('#password').type('Guess789!', {force: true});
-      cy.get('#sign-in-button').click({force: true});
-    })
 
-    cy.wait('@pingLogin')
-    cy.wait('@login')
+    cy.get('app-login app-input-text input', {
+        timeout: 20000
+      })
+      .should('be.visible')
+      .type('tiane.erwee@gmail.com');
+    cy.get('app-login #password')
+      .should('be.visible')
+      .type('Guess789!');
+
+    cy.get('app-login #sign-in-button')
+      .should('be.visible')
+      .click()
+
+    cy.wait('@pingLogin', {timeout: 60000})
+    cy.wait('@login', {timeout: 60000})
 
     cy.url().should('include', 'dashboard');
     cy.get('app-dashboard').within(() => {
       cy.get('ion-list>div').first().within(() => {
         cy.get('ion-item')
-          .click({force: true})
+          .click({
+            force: true
+          })
           .within(() => {
             cy.get('#add-alert-button').should('include.text', 'Alerts');
           })
@@ -45,5 +52,5 @@ describe('login', () => {
       // cy.get('ion-card-content').children().should('have.class', 'card-list-item');
     })
   });
-  
+
 })
