@@ -12,6 +12,15 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
+on('before:browser:launch', (browser = {}, args) => {
+  if (browser.name === 'chrome') {
+    args.push('--disable-dev-shm-usage')
+    return args
+  }
+
+  return args
+})
+
 /**
  * @type {Cypress.PluginConfig}
  */
