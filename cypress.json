@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://africanmarketstracker.standardbank.co.za",
+  "viewportHeight": 1000,
+  "viewportWidth": 1000,
+  "pageLoadTimeout": 180000
+}
