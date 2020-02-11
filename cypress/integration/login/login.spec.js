@@ -26,21 +26,20 @@ describe('login', () => {
       .should('be.visible')
       .click();
 
-    cy.wait('@pingLogin', {timeout: 60000});
-    cy.wait('@login', {timeout: 60000});
+    cy.wait('@pingLogin', {timeout: 180000});
+    cy.wait('@login', {timeout: 180000});
     cy.wait('@users');
-    cy.wait('@crrcyPairs', {timeout: 60000});
+    cy.wait('@crrcyPairs', {timeout: 180000});
     cy.wait('@notifications');
     cy.wait('@watchlist');
     cy.url().should('include', 'dashboard');
 
-    // cy.wait(1000);
-    // cy.get('app-dashboard ion-list')
-    //   .should('be.visible');
-    // cy.get('app-dashboard ion-list:first div:first ion-item')
-    //   .click({force: true});
-    // cy.get('app-dashboard ion-list>div:first ion-item #add-alert-button')
-    //   .should('include.text', 'Alerts');
+    cy.get('app-dashboard ion-list', {timeout: 180000})
+      .should('be.visible');
+    cy.get('app-dashboard ion-list:first>div:first ion-item')
+      .click({force: true});
+    cy.get('app-dashboard ion-list:first>div:first ion-item #add-alert-button')
+      .should('include.text', 'Alerts');
 
     cy.get('app-menu-header ion-menu-button')
       .should('be.visible')
@@ -52,7 +51,7 @@ describe('login', () => {
       .click({force: true});
     cy.url().should('include', 'inbox');
 
-    cy.get('app-inbox-slv ion-card')
+    cy.get('app-inbox-slv ion-card', {timeout: 180000})
       .should('be.visible');
     cy.get('app-inbox-slv ion-card-header ion-card-title')
       .should('be.visible')
