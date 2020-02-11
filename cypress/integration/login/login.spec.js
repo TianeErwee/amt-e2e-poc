@@ -12,12 +12,12 @@ describe('login', () => {
 
     cy.visit('/');
     cy.url().should('include', 'landing-page');
-    cy.get('#sign-in-button')
+    cy.get('#sign-in-button', {timeout: 180000})
       .should('be.visible')
       .click({force: true});
     cy.url().should('include', 'login');
 
-    cy.get('app-login app-input-text input', {timeout: 20000})
+    cy.get('app-login app-input-text input', {timeout: 180000})
       .should('be.visible')
       .type('tiane.erwee@gmail.com');
     cy.get('app-login #password')
