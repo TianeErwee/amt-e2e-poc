@@ -12,7 +12,9 @@ describe('login', () => {
 
     cy.visit('/');
     cy.url().should('include', 'landing-page');
-    cy.get('#sign-in-button').click({force: true});
+    cy.get('#sign-in-button')
+      .should('be.visible')
+      .click({force: true});
     cy.url().should('include', 'login');
 
     cy.get('app-login app-input-text input', {timeout: 20000})
